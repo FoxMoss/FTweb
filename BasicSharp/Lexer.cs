@@ -77,6 +77,7 @@ namespace BasicSharp
                 switch (Identifier.ToUpper())
                 {
                     case "PRINT": return Token.Print;
+                    case "LOAD": return Token.Load;
                     case "IF": return Token.If;
                     case "ENDIF": return Token.EndIf;
                     case "THEN": return Token.Then;

@@ -2,16 +2,18 @@ using System;
 using System.IO;
 using System.Net;
 using BasicSharp;
+using System.Text;
 
 namespace FTweb
 {
     public class WebInteractions
     {
-        public static string Get(string url)
+        public string pagestr;
+        public void Get(string url)
         {
             // Create a request for the URL.
             WebRequest request = WebRequest.Create(
-              url);
+              "https://"+url);
             // If required by the server, set the credentials.
             request.Credentials = CredentialCache.DefaultCredentials;
 
@@ -34,16 +36,16 @@ namespace FTweb
 
             // Close the response.
             response.Close();
-
-            return responseFromServer;
+            pagestr = responseFromServer;
+            RunFT();
         }
-        public static void RunFT(string fwFile)
+        public void RunFT()
         {
-            string code = fwFile;
+            string code = pagestr;
             Interpreter basic = new Interpreter(code);
-            basic.printHandler += Console.WriteLine;
+            basic.printHandler += Console.Write;
             basic.inputHandler += Console.ReadLine;
-            basic.getHandler += Get;
+            basic.getHandler += this.Get;
             try
             {
                 basic.Exec();

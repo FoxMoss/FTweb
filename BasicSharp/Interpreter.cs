@@ -7,7 +7,7 @@ namespace BasicSharp
     {
         public delegate void PrintFunction(string text);
         public delegate string InputFunction();
-        public delegate string GetFunction(string url);
+        public delegate void GetFunction(string url);
 
         public PrintFunction printHandler;
         public InputFunction inputHandler;
@@ -158,6 +158,7 @@ namespace BasicSharp
         void Load()
         {
             getHandler?.Invoke(Expr().ToString());
+            exit=true;
         }
 
         void Input()
